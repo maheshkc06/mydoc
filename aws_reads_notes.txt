@@ -1,0 +1,22 @@
+Amazon Notes:
+=============
+https://aws.amazon.com/solutions/case-studies/all
+==
+data center model:
+	amazon perdix
+
+Security Methods and Connectivity:
+=
+ security group
+ VPC
+ DirectConnect - availablityzone <-> datacenters, you can put your components in some DC
+ Import/Export - Getting data from amazon after you disconnected the service from amazon
+ VPN access - ( incase of hybrid clouds) on prem dc to amazon cloud
+ Dedicated Server -
+
+==
+IAM - Identity Access Managment:-
+	- user and service management
+	- Control access to AWS resources
+	- Multi-factor authentication
+	- API access ( keys )
