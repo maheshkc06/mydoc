@@ -20,3 +20,38 @@ IAM - Identity Access Managment:-
 	- Control access to AWS resources
 	- Multi-factor authentication
 	- API access ( keys )
+=
+=
+Ephemeral
+ - Instance store
+ - temp. block level storage
+ - Free storage with EC2 instance
+ - Data is lost when instance is terminated/stopped
+ - Ideal for buffer,caches,scratch data....
+
+S3:
+ - First AWS service introduced in 2006
+ - Internet accessible storage via http/https
+ - Unlimited bucket size
+ - Priced on storage used and transfer out
+ - Its not a file-system 
+ - 99.99% SLA ( uptime ) 
+    Types:
+   - Standard Storage - High resoultion photos
+     - 99.9999999% durablity ( replicated data to different availablity zone )
+   - RRS ( Reduced Redundancy Storage) ex: low resoultion photos
+     - Reduced durablity ( 99.99%)
+     - Price is cheap
+ - Granular Storage type selection
+ - Flat file structure
+ - S3 bucket Name should be unique
+
+EBS :
+ - Not Internet accessible
+ - Persistent file system to EC2
+ - Does not need to be attached to an Instance ( flexbility to attach different instance)
+ - Can be transferred between AZ
+ - Support Incremental snapshots
+ - EBL leverage use S3 to store snapshot
+ - Provisioned IOPS ( level of performance)
+ - Make sure EBS are created in AZ where the instance will be running
