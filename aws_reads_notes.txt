@@ -55,3 +55,60 @@ EBS :
  - EBL leverage use S3 to store snapshot
  - Provisioned IOPS ( level of performance)
  - Make sure EBS are created in AZ where the instance will be running
+
+Glacier :
+ - Very very cheap storage
+ - Used for infrequently used data, idea for backup
+ - very very slow retrieval times ( 4 -6 hours)
+ - High durablity
+ - Cost for restore
+ - AES 256 bit data encryption
+ - after creating vault, user account needs to be added to access glacier.
+ - secret access key has to be downloaded at the time account creation
+ - ARN ( amazon resource name)
+
+EC2: elastic compute cloud
+ - Pay per user,scalable platform for VM's
+ - AMI refers virtual disk template ( ex OVA,OVF)
+ - import/export your own AMI ( cant' do the amazon created ami )
+
+	AWS Terminology:
+
+	ECU: ( ec2 compute unix - amazon moved away this concept) ( ECU -vCPU calculation )
+	 - a relative measure of processing power
+	 - abstract cpu hardware change
+	 - One ECU is equivalent
+	 - consistent amount of CPU capacity regardless of hardware
+	 - Each instance type may be based on different physical processor
+
+	EC2 Instance types 
+		- Micro
+		- General Purpose
+		- Compute optimized
+		- GPU instance
+		- Memory optimized
+		- Storage optimized
+		- cdn.awsnow.info
+
+EC2 Pricing: /ec2/pricing
+ - Ondemand
+	- Default type
+	- Most expnsive option
+	- Prices vary by aws region
+	- Billed on hourly basis
+ - Reserved Instance
+	- Less expension
+	- Requires commitment ( 1 or 3 years )
+	- Has an upfront cost, lower hourly rate
+	- RI can be sold on the aws market place
+	- You commit to utilization
+		- Light/Medium/Heavy utilization RIs
+ - SPOT instance
+	- comes from unused aws capacity
+	- very cheap hourly rate
+	- Not guaranteed
+	- Based on a bid
+	- Ideal for raw processing power,grid-like applications ( ideal use case for spot ?)
+	- Higly scriptable
+ - Misc Pricing
+
