@@ -111,4 +111,66 @@ EC2 Pricing: /ec2/pricing
 	- Ideal for raw processing power,grid-like applications ( ideal use case for spot ?)
 	- Higly scriptable
  - Misc Pricing
+=========
+6/14/2017
+VPC:
+ - virtual networking
+ - logically isolated n/w in the aws cloud
+ - control of n/w architecture
+ - internetwork with other organization
+ - Elastic IP address ( public IPs)
+ - Enable hybrid cloud ( site to site VPN )
+ - img:AWS reference model
+ - VPC is region wide, accessible across multiple AZ,subnets are AZ specific, can route across subnets
 
+VPC Access - connect from on premises
+  - Gateway
+	 - Internet gateway IGW - virtual device allow ingress/egress
+ 	 - Virtual private gateway VPG ( aws side secure VPN)
+	 - Customer gateway (CG)
+ - VPN
+   - Direct Connect
+	- dedicate and isolated
+ 	- no internet
+ 	- HA connectivity supported
+   - Hardware based VPN
+	- On-premises to aws over internet
+	- 3rd party brand supported
+
+VPC network security:-
+  - Security group
+  - Access control list
+
+VPC peering
+ - only allowed region wide
+ - extend to your network other company
+ - Inter-VPC routing
+ - IP address scheme should be different as of now
+ - No transitive peering ( jump through )
+
+ELB -
+ - Region wise load balancer
+ - can be used internally/externally
+ - ssl termination and processing ( certificat on load balancer)
+ - ELB EC2 health checks
+ - Route 53 performs ELB health checks
+ - balance load between servers and also between servers in different AZ
+ - user -> route53 ->ELB => servers or AZ
+
+Route 53 -
+ - worldwide distributed DNS
+ - 100% SLA uptime
+ - route 53 api
+ - server health checks
+
+AWS Cloudwatch
+ - Monitoring systems in cloud
+ - Custom monitoring through api
+ - Integrate with auto scaling
+ - mobile app for basic moniotoring
+
+Auto Scaling
+ - Expand or Shrink your EC2 instance on-demand
+ - Cloudwatch can trigger
+ - cloud watch or manual schedule configuration
+ 
