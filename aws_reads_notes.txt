@@ -165,6 +165,8 @@ Route 53 -
 
 AWS Cloudwatch
  - Monitoring systems in cloud
+ 
+ 
  - Custom monitoring through api
  - Integrate with auto scaling
  - mobile app for basic moniotoring
@@ -174,3 +176,33 @@ Auto Scaling
  - Cloudwatch can trigger
  - cloud watch or manual schedule configuration
  
+Database Options:
+ - RDS
+	- MySQL, Oracle, MsSQA,Postgres,Aurora
+ - Non-RDS
+	- SimpleDB (<10G), DynamoDB , MongoDB, Couchbase
+ - In-memory
+	- 
+ - Datawarehousing - redshift
+ - Custom
+ 
+
+Amazon API:
+ - application-to-application communication method ( ex Dropbox <-> S3 )
+ - all AWS service is api capable
+ - API Wrappers:
+ - API authentication
+
+Amazon Lambda:
+ - Its a compute service
+ - Event driven compute service - able to take action against event.
+ - Rund code trigger by events
+ - Does not require an instance, doesn't a require an infrastructure
+ - Rapid response to events
+ - Thousands of functions can run at same time
+ - Run only when needed
+ - Use cases
+	- thumbnail images
+	- address in dynamoDB
+ - Stateless, request-driven code called lambda function
+ - Connective tissue for aws services
