@@ -1,4 +1,4 @@
-Amazon Notes:
+Amazon Notes: ( Fundamental)
 =============
 https://aws.amazon.com/solutions/case-studies/all
 ==
@@ -206,3 +206,44 @@ Amazon Lambda:
 	- address in dynamoDB
  - Stateless, request-driven code called lambda function
  - Connective tissue for aws services
+
+06/15/17
+ SES ( simple email services )
+  -Cost effective bulk email service, application can send email thru this service
+  -Outbound-only-email-sending services
+  -Leverage amazon email reputation ( avoid spam )
+  - its not replacement for email servers ( like ms exchange)
+  
+  SQS ( simple queuing service )
+   - communication between application to application
+   - Unlimited messages and queue size
+   - Fast,reliable, and scalable
+   - billed in chunks of 64KB payload
+   - First 1 million request is free
+   
+   SNS - ( simple notificatin service )
+    - Push messaging service, able to carry message and notification between services
+    - http/https, email, email-json, SMS, amazon SQS
+   
+   CloudFront:
+    - global content delivery network , its use of edge location
+    - Cache static content
+    - proxy dynamic content
+    - works with aws and non-aws service  
+    - mapping your website to cloudfront will help you access faster across globe
+   
+ 
+  CloudFormation:
+   - Automate AWS resource provisioning, automate provisioing the entier environment
+   - Its Free service
+   - Deleting the CF deletes all instance except data
+   
+   Elastic Beanstalk:
+    - Similar to CloudFormation, leverages cloud formation 
+    - more for developers
+    - Help to Deploy environmen for developers to develop. who are unaware about the infrastructure setups.
+    
+  CloudTrail:
+   - Records API Calls
+   - Log files ( maintain all information ,like api caller ,time,source ip ,request parameter, response returned, etc)
+   - Maintain history
