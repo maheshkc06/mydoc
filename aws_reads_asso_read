@@ -1,0 +1,33 @@
+Solution-architech-associate -reads
+===
+
+
+VPC:
+ - VPC regions wide
+ - logically isolated network in the aws cloud
+ - control of n/w architecture
+ - Elastic IP address - public ip address
+ - Enhance security
+ - Enable hybrid cloud
+ - single tenant dedicated server hardware
+ 
+ VPC Elements:
+ - Subnets
+ - Route tables
+ - Internet Gateway
+ - Elastic Ips
+ - Endpoints
+ - NAT Gateway
+ - Peering connection
+ - Network ACLs
+ - Securiy groups
+ - VPN
+ 
+ VPC Characteristics
+ - aws reserves 5 ip addrsses per subnet ( first 4 and last 1)
+ - private, public and vpn only 
+ - do not span AZ
+ - Single region,multi-AZ
+ - CIDR 16 - 28
+ - Select IP Prefix
+ 
