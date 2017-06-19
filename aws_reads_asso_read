@@ -121,3 +121,36 @@ Placement group:
  - Instance has to be deciced at creation time
  - placement group cannot be merged
  - can span peered vpc but there are limitations
+ 
+ Load balancer
+ - Classic load balancer
+	- Region wide load balancer
+	- can be used internally or externally ( internet facing)
+ 	- Layer 4 and Layer 7
+	- SSL termination and Processing ( off loading instance of processes)
+	- Cookie-based sticky session
+	- Integrates with auto scaling
+	- ELB give ec2 health checks / cloudwatch
+	- Integrates with Route 53
+	- Supported Ports - 25, 80,443,1024-65535
+	- Does not support EIP (public IP), route 53 sits in front
+	- Support ipv4/v6
+	- integrates with cloud trail
+	- Multiple ssl certificates require multiple elbs
+	- wildcards certificates are supported
+	- Its a platform service
+	- Create load balancer from EC2 link in console
+
+- Application Load balancer
+	- Layer 7 only
+	- Content based routing
+	- Support microservices and containers
+	- Integrates with elastic container servers
+	- better performance for real time streaming
+	- Reduced hourly cost
+	- Deletion protection
+	- Better health checks
+	- Path based routing
+ - Application load balancer
+
+
