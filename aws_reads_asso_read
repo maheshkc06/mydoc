@@ -31,3 +31,93 @@ VPC:
  - CIDR 16 - 28
  - Select IP Prefix
  
+NAT Instance/Gateway:
+
+ - attached internet gateway to VPC
+ - NAT Gateway:
+  
+ - Single nat gateway - bottlenecks
+  - 
+ - Use NAT gateway
+  
+ - To avoid bottlenecks
+        
+	- Increase instance size
+        
+	- choose instance that supports enhanced networking
+        
+	- Scale out - add NATS per subnet
+        
+	- https://aws.amazon.com/articles/
+ 
+
+
+ -Demo :NAT Instance vs NAT gateway
+
+VPC:Endponts
+ - Localize the traffic within VPC to access S3 service.
+ - Demo: Endpoints Demo
+
+VPC Connectivity:
+ - VPC Peering
+	- Single region inter-vpc
+	- No overlapped CIDR nw
+	- Same or different aws account
+	- 50 VPC peers per VPC, upto 125 by request
+
+AWS VPC access
+VPN
+ - hardware based
+ - direct connect
+ - VPN CLoudHub
+ - software based
+Gateway:
+
+Direct connect -
+ by default- direct connect did not come up with redundant
+ direct connect can be partitiond as virtual interfaces
+ https://www.youtube.com/watch?v=SMvom9QjkPk
+====
+EC2 Instance types:
+ -On demand
+	- Based on capacity availablity
+ -Reserved Instance - Guaranteed avaialablity
+	- Standard - lower hourly rate, yearly commitment
+	- Scheduled - Buy for partical time ( week, month, year)
+ - SPOT instance -
+  - Excessing capacity can be bid
+  - immediatly loose access based on bid
+
+-Dedicated Instance
+  - Dedicated host - physcial host dedicated,bring your license scenario
+  - Dedicated Instance - Loose visibility on which server you are running on. No licence can be used
+
+=
+Standard reserved instance attributes
+ - All upfront - upto 68% over 3 yr term
+ - Partial upfront - upto 60% over 3 yr term
+ - No upfront - upto 30% over a 1 yr term
+
+Scheduled reserved instance attributes:
+ - One year commitment is required
+ - charged hourly and billed at monthly
+
+Modifying your RIs
+ - Switch AZ within same region
+ - change the instance size within the same instance type
+ - Instance type modifications are supported only for Linux
+ - Cannot change the instance size of windows instance
+
+Instance Normalalization factor:
+
+High Performance Computing:
+
+Placement group:
+ - a logical grouping of instance in a single AZ
+ - Cant span multiple AZ
+ - Achieve low latency requirements, high performance requirement
+ - only supported enhanced networking
+ - Existing instance cannot be moved into a placement group
+ - Instance has to be deciced at creation time
+ - placement group cannot be merged
+ - can span peered vpc but there are limitations
