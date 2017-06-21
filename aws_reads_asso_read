@@ -151,6 +151,67 @@ Placement group:
 	- Deletion protection
 	- Better health checks
 	- Path based routing
- - Application load balancer
+==
+6/21/2017 [ ch09 ]
+Instance storage types:
+ - Instance store : Ephermal storage
+	- Used for temporary storage
+	- Local storage for particular instance
+
+ - EBS : Elastic block storage [ https://aws.amazon.com/ebs/details/ ]
+	- GP-SSD 
+	- PIOPS - Provisioned IOPS ()
+	- Throughput Optimized HDD
+	- Cold HDD - use cases big-data
+	- Magnectic
+		* Difference based on iops and thoughput it generates
+	
+	Characteristics:
+	- Does not need to be attached to an instance
+	- Cannot be attached to more than one at same time
+	- Can be trnasferred between AZ
+	- EBS volume data is replicated across multiple servers in an AZ 
+	- Encryption of EBS data volumes, boot volumes and snapshots
+	- AFR ( annual failure rate ) 0.1% to 0.2% , SLA 99.95%
+	- 
+	
+Increase IOPS Performance:
+	- RAID 0 using stripped gp2 or standard volumes, or striped PIOPS volumes
+
+In Demo:
+	- Option 'auto-enable IO' - if any inconsistency with volume, it will be disable IO traffic		
+	- iops/size is 50:1 ( ex 15000/50=300)
+
+EBS-Optimized Instance:
+	- Dedicated capacity for amazon EBS I/O
+	- Designed for use with all ebs volume types
+	- max bandwidth 400Mbps - 12,000Mbps
+	- IOPS: 3000 -65000
+	
+EBS snapshot characteristics:
+	- Point in time snapshots
+	- Supports incremental snapshots
+	- Billed only for the changed blocks
+	- Deleting a snapshot removes oly the data not needed by any other snapshot
+	- Leverage S3 to store snapshots
+
+EBS snapshot Features
+	- Resizing EBS volumes
+	- Sharing EBS snapshots
+	- Copying EBS snapshots across regions
+	- Flow for increasing the size of volume from snapshot:Powerdown/detach/snapshot/increasesize/powerup
+
+
+EFS - Elastic File System
+ 	- Network attached Storage as a service
+	- Simple, petabytes scalable file storage for use with EC2 instance
+	- EFS file systems are elastic, automatically grow and shrink as you add and remove files
+	- Stored redundanty across multiple AZs
+	- 1 to 1000 EC2 instance, from multiple AZA, concurrently
+	- use cases home directories ,bigdata analytics ..
+	- By default, 10 file systems per aws account per regions
+	- Supports NFS 4.1
+	- On-premises access enabled via direct connect
+==
 
 
