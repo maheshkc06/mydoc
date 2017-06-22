@@ -214,4 +214,95 @@ EFS - Elastic File System
 	- On-premises access enabled via direct connect
 ==
 
+===
+6/22
+Amazon S3:
+	- Storage and Archive
+		- Amazon S3 - object based
+		- Amazon Glacier long term storage ( archive )
+		- Amazon EBS
+		- Amazon EFS
+		- Amazon import/export  ( Own devices to copy to put/out)
+		- Amazon SnowBall ( aws hw/sw service , send certificed special hw)
+		- AWS storage gateway
 
+	- S3
+	 - Standard, costly service
+	 - Standard-IA, ( Infrequest access )
+	 - RRS 
+
+- S3 Features
+ - Versioning
+ - Cross-region replication (CRR)
+ - Data lifecycle management
+ - MFA delete ( ) - will not allow anyone to delete.
+ - Permissions 
+ - Time-limited access to objects 
+
+Securing Amazon S3:
+ - Bucket Policies
+ - MFA delete ( two factor authentication needed to delete )
+ - Backing up your bucket to another bucket in a different account
+
+Amazon Glaciar: ( long time archihiving)
+ - upto 1000vaults per account
+ - Individual archives from 1byte to 40terabytes
+ - Integrate with amazon S3 lifecycle policies
+
+AWS Storage Gateway:
+ - Gateway-cached volumes ( Frequent access data in on-premises and rest in aws s3)
+ - Gateway-stored volumes ( Store data locally, configure to point in time snapshot to S3 )	
+ - Gateway-Virtual tape library
+
+AWS_Storage Option pdf	-  for reference
+
+CLOUNDFRONT:
+ - Global content delievey network service
+ - work with other services to distribute content to end user with low latency,high data transfer
+ -
+CF characteristics:
+ Distribution types:
+ - web distribution and rtmp distribution
+ - Geo Restriction
+ - HTTP methos are supported
+ - Zone apex - route 52 alias recor mappting to cloudfrond distribution
+ - Support subdomains
+ - SSL - wildcard,
+ - Invalidation
+ - Edge caching - Dynamic content supported
+
+
+===
+RDS :
+ Characteristics:
+  - between IaaS and PaaS
+  - Multi AZ deployment option
+  - On-demand and reserved instance pricing
+  - Magnetic,GP-SSD, PIOPS
+  - Oracle and MSQL licensing
+  - Automated or Maual backup 
+
+RDS automated backup:
+RDS Restore:
+
+Multi AZ failover:
+ - multi AZ for HA
+ - sync. replica in secondary AZ
+RDS reserved Instance
+==
+DynamoDB:
+ - PaaS
+ - Scalable NoSQL DB
+ - automatically replicate data across three AZ
+ - High throughput and low latency
+ - ElasticCache can be used infront of DynamoDB for better performance
+
+Non-ideal for application tied to traditiona database
+Not for application requires Joins complex transcation
+Not for BLOB data
+Not for large data with low i/o rate
+
+Features:
+ - Secondary Index
+ - Streams
+ - Cross region replication
