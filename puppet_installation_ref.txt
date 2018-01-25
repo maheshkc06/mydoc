@@ -3,3 +3,61 @@
 
 2. Install puppet server 
 sudo yum -y install puppet-server
+
+3. puppet master --version
+
+=========
+
+Environments root dir: /etc/puppet/environments
+Puppet conf file is : /etc/puppet/puppet.conf
+{contain there section Main,Master and Agent }
+
+==========
+Setting up production environment ( example from pluralsight)
+
+# cd /etc/puppet/environments/
+# mkdir -p production/{modules,manifests}
+
+# cd production
+# cat > environment.conf
+modulepath = /etc/puppet/environments/production/modules
+environment_timeout = 5s
+^D to save
+Next edit master config file to refer this env.
+#vi /etc/puppet/puppet.conf and update below line in [main] section
+    dns_alt_names = puppet,puppetmaster,puppetmaster.chimah.com
+
+and add below section
+[master]
+    environmentpath = $confdir/environments/
+    basemodulepath = $confdir/modules:/opt/puppet/share/modules
+
+====
+=> set SELinux to permissive mode
+#sudo setenforce permissive
+#vi /etc/sysconfig/selinux -> replace enforcing with 'permissive'
+[root@puppetmaster puppet]# getenforce
+Enforcing
+[root@puppetmaster puppet]# setenforce permissive
+[root@puppetmaster puppet]# getenforce
+Permissive
+
+=>Generating SSL certificates:
+#puppet master --verbose --no-daemonize
+
+First time, It will look for any ssl certificate specified in $ssldir, if not then it will create one.
+#ls /var/lib/puppet/ssl/
+
+[to regenerate ssl file, these files can be removed and run puppet run again]
+
+=>Adjust Iptables
+file:/etc/sysconfig/iptables
+add this rule
+-A INPUT -m state --state NEW -m tcp -p tcp --dport 8140 -j ACCEPT
+=====
+Apache and Phusion passenger
+
+#sudo yum -y install httpd httpd-devel mod_ssl ruby-devel rubygems gcc gcc-c++ libcurl-devel openssl-devel
+
+#sudo gem install rack passenger ( ruby package manager to use for passenger installation )
+
