@@ -61,3 +61,103 @@ Apache and Phusion passenger
 
 #sudo gem install rack passenger ( ruby package manager to use for passenger installation )
 
+--------------------****************---------------------
+{ any error related to ruby version see below...}
+[vagrant@puppetmaster puppet]$ sudo gem install rack
+ERROR:  Error installing rack:
+        rack requires Ruby version >= 2.2.2.
+[vagrant@puppetmaster puppet]$ sudo gem install passenger
+ERROR:  Error installing passenger:
+        rake requires Ruby version >= 2.0.0.
+soln: resolved by updating rubygems
+#sudo gem install rubygems-update
+#update_rubygems
+[vagrant@puppetmaster puppet]$ sudo gem install rack passenger
+YAML safe loading is not available. Please upgrade psych to a version that supports safe loading (>= 2.0).
+Fetching: rack-2.0.3.gem (100%)
+ERROR:  Error installing rack:
+        The last version of rack (>= 0) to support your Ruby & RubyGems was 1.6.8. Try installing it with `gem install rack -v 1.6.8`
+        rack requires Ruby version >= 2.2.2. The current ruby version is 1.8.
+Fetching: rake-12.3.0.gem (100%)
+ERROR:  Error installing passenger:
+        The last version of rake (>= 0.8.1) to support your Ruby & RubyGems was 10.5.0. Try installing it with `gem install rake -v 10.5.0` and then running the current command again
+        rake requires Ruby version >= 2.0.0. The current ruby version is 1.8.
+[vagrant@puppetmaster puppet]$ sudo gem install rack -v 1.6.8
+YAML safe loading is not available. Please upgrade psych to a version that supports safe loading (>= 2.0).
+Fetching: rack-1.6.8.gem (100%)
+Successfully installed rack-1.6.8
+Installing ri documentation for rack-1.6.8
+/usr/lib/ruby/1.8/rdoc/rdoc.rb:280: warning: conflicting chdir during another chdir block
+/usr/lib/ruby/1.8/rdoc/rdoc.rb:287: warning: conflicting chdir during another chdir block
+Done installing documentation for rack after 22 seconds
+1 gem installed
+[vagrant@puppetmaster puppet]$ sudo gem install passenger
+YAML safe loading is not available. Please upgrade psych to a version that supports safe loading (>= 2.0).
+ERROR:  Error installing passenger:
+        The last version of rake (>= 0.8.1) to support your Ruby & RubyGems was 10.5.0. Try installing it with `gem install rake -v 10.5.0` and then running the current command again
+        rake requires Ruby version >= 2.0.0. The current ruby version is 1.8.
+[vagrant@puppetmaster puppet]$ gem install rake -v 10.5.0
+YAML safe loading is not available. Please upgrade psych to a version that supports safe loading (>= 2.0).
+Fetching: rake-10.5.0.gem (100%)
+ERROR:  While executing gem ... (Gem::FilePermissionError)
+    You don't have write permissions for the /usr/lib64/ruby/gems/1.8 directory.
+[vagrant@puppetmaster puppet]$ sudo gem install rake -v 10.5.0
+YAML safe loading is not available. Please upgrade psych to a version that supports safe loading (>= 2.0).
+Fetching: rake-10.5.0.gem (100%)
+Successfully installed rake-10.5.0
+Installing ri documentation for rake-10.5.0
+/usr/lib/ruby/1.8/rdoc/rdoc.rb:280: warning: conflicting chdir during another chdir block
+/usr/lib/ruby/1.8/rdoc/rdoc.rb:287: warning: conflicting chdir during another chdir block
+Done installing documentation for rake after 9 seconds
+1 gem installed
+[vagrant@puppetmaster puppet]$ sudo gem install passenger
+YAML safe loading is not available. Please upgrade psych to a version that supports safe loading (>= 2.0).
+Fetching: passenger-5.1.12.gem (100%)
+Building native extensions. This could take a while...
+
+
+Successfully installed passenger-5.1.12
+Installing ri documentation for passenger-5.1.12
+/usr/lib/ruby/1.8/rdoc/rdoc.rb:280: warning: conflicting chdir during another chdir block
+/usr/lib/ruby/1.8/rdoc/rdoc.rb:287: warning: conflicting chdir during another chdir block
+Done installing documentation for passenger after 60 seconds
+1 gem installed
+[vagrant@puppetmaster puppet]$
+
+------------------------*********************-------------
+Install apache module for passenger
+#sudo passenger-install-apache2
+[vagrant@puppetmaster ~]$ sudo mkdir -p /usr/share/puppet/rack/puppetmasterd/{public,tmp}
+[vagrant@puppetmaster ~]$ sudo cp /usr/share/puppet/ext/rack/config.ru /usr/share/puppet/rack/puppetmasterd/
+[vagrant@puppetmaster ~]$ sudo chown puppet:puppet /usr/share/puppet/rack/puppetmasterd/config.ru
+#git clone https://github.com/benpiper/puppet-fundamentals-puppetmaster/
+
+  #cd puppet-fundamentals-puppetmaster/
+  #vi puppetmaster.conf ( correct the passenger module version in LoadMoudle accordingly to the passenger install)
+  sudo cp puppetmaster.conf /etc/httpd/conf.d/
+  
+  #service httpd start
+  
+  >Bootup client machines, update /etc/hosts with puppetmaster ip/name .
+  >Install puppet agent on client machines
+  
+  yum -y install http://yum.puppetlabs.com/puppetlabs-release-el-6.noarch.rpm
+  yum -y install puppet
+  yum -y install nano
+  
+  edit /etc/puppet/puppet.conf and update server = puppetmaster
+  
+  >generate ssl certificate on client nodes using below command
+#  puppet agent --verbose --no-daemonize --onetime
+
+Once the cert created on clients, sign the requests from 'puppetmaster'
+#puppet cert list
+#puppet cert sign 'certname' <ex:wiki
+
+
+Check the communication between server/cleint by running the below command in clients machines
+
+#puppet agent --verbose --no-daemonize --onetime
+
+
+
