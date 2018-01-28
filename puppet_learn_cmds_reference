@@ -24,3 +24,11 @@ Puppet class: A named collection of resource declaration, variables, selectors, 
 puppet class ,helps to avoid repetition of code
 
 variable array  = to install multiple packages
+=======
+Puppet modules:
+puppet modules are reusable,self-contained bundles of puppet code and other data
+
+puppet forge: https://forge.puppetlabs.com
+
+creating modules:
+#puppet module generate chimah-mediawiki --environment production
