@@ -1,0 +1,26 @@
+=> Manifests are puppet programs, .pp extention, stored under manifests directory
+
+=>Old version of files are backed up in "/var/lib/puppet/clientbucket"
+
+To pull the config from puppet master, run
+
+#puppet agent --verobse --no-daemonize --onetime
+
+To restore a previous version of file
+
+#puppet filebucket -l --bucket /var/lib/puppet/clientbucket/ restore /info.txt 9a36f93cb65db1b14fb5f41b266c8f72
+
+#puppet filebucket -l --bucket /var/lib/puppet/clientbucket/ get 9a36f93cb65db1b14fb5f41b266c8f72
+
+9a36f93cb65db1b14fb5f41b266c8f72 is a md5 sum file
+
+=> /var/log/messages will have the puppet run details
+
+Managing Files
+Managing packages:
+Managing Services
+Selectors - to decide appropriate service based on os ( redhat,debian,etc )
+Puppet class: A named collection of resource declaration, variables, selectors, or any other puppet code
+puppet class ,helps to avoid repetition of code
+
+variable array  = to install multiple packages
