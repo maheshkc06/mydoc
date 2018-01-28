@@ -1,0 +1,36 @@
+node 'wiki' {
+  class { 'linux':,}
+
+}
+
+node 'wikitest' {
+  class { 'linux':, }
+
+}
+
+class linux {
+
+  $ntpservices =  $osfamily ? {
+    'redhat' => 'ntpd',
+    'debian' => 'ntp',
+    default => 'ntp',
+  }
+
+  $admintools = [ 'ntp', 'telnet','git']
+
+
+  file { '/info.txt':
+    ensure => 'present',
+    content => "File created by Puppet",
+  }
+
+  package { $admintools:
+    ensure => 'installed',
+  }
+
+  service { $ntpservices:
+    ensure => 'running',
+    enable => true,
+  }
+
+}
