@@ -1,0 +1,132 @@
+Diego:
+
+Self-healing container management system ( maintain correct number of instance in diego cell )
+Responsible for scheduling and running Tasks and Long running process ( ex:web application )
+- LRP ->
+--- web applications
+--- it can have many instances, app instances run in containers and containers are immutable, if you need any change the container going to terminate and build new containers,isolate memory,cpu and isk from other applications
+-- it runs on Cells
+
+- Tasks -> short term processes which run only once and terminate
+
+Diego Cell:
+-- Nothing but a VM
+---Its where the application instance will run and applications tasks
+-- It uses Garden for creating and managing containers
+Garden:
+-- its a Go API for creating and managing containers
+--runC implements Open Container Initiative ( which support docker )
+--pluggable support Linux and Windows based apps
+Rep:
+--Manages container lifecycle
+--Responsible to run tasks and LRP instances by creating container and take action on it
+--Participate in Autions , Everytime tasks and lrp created, auction will be help to determine which cell its going to run
+--Responsible to reacts to container events
+--Resource allocation
+--Responsible to transfer stdout/stderr from container process to metron agent
+--Collects metrics and transfer to loggregator
+--Collect stats reports and send to BBS
+--Executor is sub-process of REP, it manages allocation of container to the cell and forward logs and metrics to Metron.
+
+Diego Metron Agent:
+----- Forward app logs, errors and metrics to the loggregator
+
+
+Diego Brain:
+--- Distributes tasks and LRPs to diego cell
+--- Correct discrepancies between actual and desired counts
+-- Ensure fault tolerance and long-term consistency
+-- Auctioneer
+-------- it holds auctions for tasks and lrp instance
+-------- distributes work using auction algorithm
+---------communicate over https with diego cells rep
+---------Uses consul/locket so only one auction at time
+
+BBS
+-- Maintain a real-time represntation of diego cluster ( lrp's, lrp's instances and in-flight tasks )
+-- Maintain a lock in consul/locket to ensure that only one BBS is active
+-- Periodically check desired running process and actual running processes, and enforce desired count
+-- Resends auction requests for tasks which are pending too long
+-- Backed by MySQL
+
+--
+====
+LOGGREGATOR:
+-log aggreatotr
+-gather stream logs and metrics and stream metrics for cf components
+--doppler - collect logs from metron agents and stores them in temporary buffer, and it forwards to traffic controller or third party syslog drains
+--traffic controller -
+------ handled client requests of logs
+------- gather logs from all the doppler services and provides to capis and also expose to firehose
+- Firehose: websocket endpoint that streams all the event data, its logs , http events and container metrics and metrics for cf components
+
+-- cloud controller logs NOT streamed through firehose
+-- data comings from firehost will have sensitive information
+Nozzle:
+-- are programs which consule data from loggregator firehose
+-- configureed to select ,buffer and transform data,forwards to other application and services
+
+CLOUD CONTROLLER:
+-- CAPI
+-- its directs the deployment of applications
+-- coordinate individual Diego cells to stage and run applications
+-- Exposed using REST apis, and users can use to push,stage,run, update and retrieve applications
+-- also, push stage run one-off tasks
+-- responsible for system state and applicate lifecycle policies
+-- CCDB : maintain recors for the logical hierarchical structure
+------- stores applicate meta-data
+--------stores informs orgs,spaces,servies,users
+-- BLOBSTORE:
+---- when you stage and run applications, CC stores all the binaries in Blobstore
+---- blobstore contains: buildpacks, (directories diego downloads and compiling packages
+     app packages(source code, source code, resources, zipped into single file),
+     resouce cache, ( large files from application which Cc store for later user ) 
+     buildpack cache ( large files generated during staging and stored for later use 
+     droplets ( staged appplications it has everything to go and run in containers )
+--CC BRIDGE
+---- translate app specfic request from cc to bbs
+-- components, stager, cc-uploader, nsync-broker, nsync-listner, tps listener, tps watcher
+
+ROUTING:
+--- all incoming traffic is going to go router, based on the incoming traffice it goes to cf-components or applications
+-- ex: cf push will go to cloud controller
+-- http request will go to applications
+-- go router periodicall query bbs to know where the apps are running
+-- implemented in go and has all the routing logic to reduce latency for type of incoming requests
+
+Build packs
+-- provides framework and runtime support for apps
+-- Determine app dependencies
+-- compiles and prepares the app for launch
+
+Droplets
+-- binary artifact
+-- its consists the app, required runtime components and dependencies
+-- composed via buildpack
+-- equivalent of container image
+-- runs like oci-compatible container image
+-- 
+
+How the applications are staged:
+
+
+----------------------
+Orgs and Spaces
+---
+RBAC - Role Based Access Control
+
+
+
+Roles
+org manager
+org billing manager
+org auditor
+=
+space manager
+space auditor
+space developer(*)
+
+Manifests
+
+--
+
